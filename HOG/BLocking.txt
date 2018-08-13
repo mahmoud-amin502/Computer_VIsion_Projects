@@ -1,0 +1,38 @@
+function [ Blocks ] = Untitled()
+mat=rand([130,66]);
+[m, n]=size(mat);
+overlap=8;
+block_size=16;
+step=block_size-overlap;
+while mod(m,block_size+overlap)~=0
+    mat(:,end+1)=0;
+    m=m+1;  
+end
+
+while mod(n,block_size+overlap)~=0
+    mat(end+1,:)=0;
+    n=n+1;   
+end
+
+Blocks=cell(2,2);
+sz1=size(mat);
+stop1=(sz1(1)-overlap)-1;
+stop2=(sz1(2)-overlap)-1;
+
+counti = 0;
+for i = 1:step:stop1
+    counti = counti + 1;
+    countj = 0;
+    for j = 1:step:stop2
+        countj = countj + 1;
+        Blocks{counti,countj} = mat(i:(i+block_size-1),j:(j+block_size-1));
+    end
+end
+
+
+
+
+
+
+end
+
